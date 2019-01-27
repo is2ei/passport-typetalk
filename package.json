@@ -1,0 +1,43 @@
+{
+  "name": "passport-typetalk",
+  "version": "0.1.0",
+  "description": "Typetalk authentication strategy for Passport.",
+  "keywords": [
+    "passport",
+    "typetalk",
+    "auth",
+    "authn",
+    "authentication",
+    "identity"
+  ],
+  "author": {
+    "name": "Issei Horie",
+    "email": "is2ei.horie@gmail.com",
+    "url": "http://is2ei.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/is2ei/passport-typetalk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/is2ei/passport-typetalk/issues"
+  },
+  "license": "MIT",
+  "main": "./lib",
+  "dependencies": {
+    "passport-oauth2": "^1.4.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-passport-strategy": "^1.0.1",
+    "jshint": "^2.9.7",
+    "mocha": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --require test/bootstrap/node test/*.test.js",
+    "lint": "node_modules/.bin/jshint ./lib"
+  }
+}
