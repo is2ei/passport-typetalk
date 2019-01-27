@@ -2,9 +2,11 @@ passport-typetalk
 ===
 
 [![Build Status](https://travis-ci.org/is2ei/passport-typetalk.svg?branch=master)][travis]
+[![Coverage Status](https://coveralls.io/repos/github/is2ei/passport-typetalk/badge.svg?branch=master)][coveralls]
 [![npm version](https://badge.fury.io/js/passport-typetalk.svg)][npm]
 
 [travis]: https://travis-ci.org/is2ei/passport-typetalk
+[coveralls]: https://coveralls.io/github/is2ei/passport-typetalk?branch=master
 [npm]: https://badge.fury.io/js/passport-typetalk
 
 [Passport](http://passportjs.org/) strategy for authenticating with [Typetalk](https://www.typetalk.com) using the OAuth 2.0 API.
