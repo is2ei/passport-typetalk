@@ -30,14 +30,17 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-passport-strategy": "^1.0.1",
+    "istanbul": "^0.4.5",
     "jshint": "^2.9.7",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
   },
   "engines": {
     "node": ">=0.4.0"
   },
   "scripts": {
     "lint": "node_modules/.bin/jshint ./lib ./test",
-    "test": "node_modules/.bin/mocha --require test/bootstrap/node test/*.test.js"
+    "test": "node_modules/.bin/mocha --require test/bootstrap/node test/*.test.js",
+    "coverage": "node_modules/.bin/nyc node_modules/.bin/mocha --require test/bootstrap/node test/*.test.js"
   }
 }
