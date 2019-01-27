@@ -8,11 +8,17 @@ $ npm install
 Lint
 
 ```
-$ npm run-script lint
+$ npm run lint
 ```
 
 Test
 
 ```
 $ npm test
+```
+
+Coverage
+
+```
+$ npm run coverage
 ```
