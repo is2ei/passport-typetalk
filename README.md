@@ -21,7 +21,7 @@ $ npm install --save-dev passport-typetalk
 
 Express example
 
-```
+```javascript
 const {TYPETALK_CLIENT_ID, TYPETALK_CLIENT_SECRET} = process.env;
 const Express = require('express');
 const TypetalkStrategy = require('passport-typetalk').Strategy
@@ -43,7 +43,7 @@ passport.use(new TypetalkStrategy({
 app.use(passport.initialize());
 
 app.get('/', function(req, res) {
-  res.send('<a href="/auth/typetalk">Login with Typetalk</a>')
+  res.send('<a href="/auth/typetalk">Log in with Typetalk</a>')
 })
 
 app.get('/auth/typetalk', passport.authorize('typetalk'));
