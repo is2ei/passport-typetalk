@@ -22,36 +22,54 @@ $ npm install --save-dev passport-typetalk
 Express example
 
 ```javascript
-const {TYPETALK_CLIENT_ID, TYPETALK_CLIENT_SECRET} = process.env;
-const Express = require('express');
-const TypetalkStrategy = require('passport-typetalk').Strategy
-const passport = require('passport');
-
-const app = Express();
+const {TYPETALK_CLIENT_ID, TYPETALK_CLIENT_SECRET} = process.env,
+      TypetalkStrategy = require('passport-typetalk').Strategy,
+      passport = require('passport')
+      express = require('express'),
+      app = express();
 
 passport.use(new TypetalkStrategy({
     clientID: TYPETALK_CLIENT_ID,
     clientSecret: TYPETALK_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/typetalk/callback",
     scope: ['my', 'topic.read']
-  }, (accessToken, refreshToken, profile, done) => {
-    // optionally persist profile data
-    done(null, profile);
+  }, (accessToken, refreshToken, profile, cb) => {
+    return cb(null, profile);
   }
 ));
 
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+app.use(require('morgan')('combined'));
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+
 app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/', function(req, res) {
-  res.send('<a href="/auth/typetalk">Log in with Typetalk</a>')
-})
+app.get('/', (req, res) => {
+  res.send('<a href="/auth/typetalk">Login with Typetalk</a>');
+});
 
-app.get('/auth/typetalk', passport.authorize('typetalk'));
+app.get('/profile', (req, res) => {
+  res.send('<p>ID: '+req.user.id+'</p><p>Name: '+req.user.name+'</p>');
+});
+
+app.get('/auth/typetalk',
+  passport.authenticate('typetalk'));
 
 app.get('/auth/typetalk/callback',
-  passport.authorize('typetalk', { failureRedirect: '/' }),
-  (req, res) => res.redirect('/')
-);
+  passport.authenticate('typetalk', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('/profile');
+  });
 
 app.listen(3000);
 ```
