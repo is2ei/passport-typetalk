@@ -15,6 +15,14 @@ describe('Strategy', function() {
     });
   });
 
+  describe('constructed without options', function() {
+    it('should throw', function() {
+      expect(function() {
+        new TypetalkStrategy(null, function(){});
+      }).to.throw(Error);
+    });
+  });
+
   describe('constructed with undefined options', function() {
     it('should throw', function() {
       expect(function() {
