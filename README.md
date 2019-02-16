@@ -16,7 +16,7 @@ passport-typetalk
 ## Install
 
 ```
-$ npm install --save-dev passport-typetalk
+$ npm install passport-typetalk
 ```
 
 ## Usage
