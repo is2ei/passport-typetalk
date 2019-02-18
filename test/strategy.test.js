@@ -116,7 +116,7 @@ describe("TypetalkStrategy", function () {
                         done();
                     })
                     .req(function () {
-                        // Do nothiung.
+                        // Do nothing.
                     })
                     .authenticate();
             });
