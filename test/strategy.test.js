@@ -10,8 +10,7 @@ var TypetalkStrategy = require("../lib/strategy");
 
 describe("TypetalkStrategy", function () {
 
-    var ERR_MSG = "",
-        url = "";
+    var url = "";
 
     describe("constructed", function () {
 
@@ -29,7 +28,6 @@ describe("TypetalkStrategy", function () {
         });
 
         describe("without a clientID option", function () {
-            ERR_MSG = "OAuth2Strategy requires a clientID option";
             it("should throw", function () {
                 expect(function () {
                     var strategy = new TypetalkStrategy({
@@ -47,7 +45,7 @@ describe("TypetalkStrategy", function () {
                         .authenticate();
                 })
                     .to
-                    .throw(TypeError, ERR_MSG);
+                    .throw(TypeError, "OAuth2Strategy requires a clientID option");
             });
         });
 
@@ -58,6 +56,45 @@ describe("TypetalkStrategy", function () {
                         "clientID": "ABC123"
                     }, function () {
                         // Do nothing.
+                    });
+                    chai.passport.use(strategy)
+                        .redirect(function (u) {
+                            url = u;
+                        })
+                        .req(function () {
+                            // Do nothing.
+                        })
+                        .authenticate();
+                }).to.not.throw();
+            });
+        });
+
+        describe("with null option", function () {
+            it("should throw", function () {
+                expect(function () {
+                    var strategy = new TypetalkStrategy(null, function () {
+                        // Do nothiung.
+                    });
+                    chai.passport.use(strategy)
+                        .redirect(function (u) {
+                            url = u;
+                        })
+                        .req(function () {
+                            // Do nothiung.
+                        })
+                        .authenticate();
+                })
+                    .to
+                    .throw(TypeError, "OAuth2Strategy requires a clientID option");
+            });
+        });
+
+        describe("without verify", function () {
+            it("should not throw", function () {
+                expect(function () {
+                    var strategy = new TypetalkStrategy({
+                        "clientID": "ABC123",
+                        "clientSecret": "secret"
                     });
                     chai.passport.use(strategy)
                         .redirect(function (u) {
