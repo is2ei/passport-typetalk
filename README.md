@@ -24,54 +24,66 @@ $ npm install passport-typetalk
 Express example
 
 ```javascript
-const {TYPETALK_CLIENT_ID, TYPETALK_CLIENT_SECRET} = process.env,
-      TypetalkStrategy = require('passport-typetalk').Strategy,
-      passport = require('passport')
-      express = require('express'),
-      app = express();
+const TypetalkStrategy = require("passport-typetalk").Strategy,
+    config = require("./config"),
+    express = require("express"),
+    passport = require("passport");
+
+var app = express(),
+    port = 3000;
 
 passport.use(new TypetalkStrategy({
-    clientID: TYPETALK_CLIENT_ID,
-    clientSecret: TYPETALK_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/typetalk/callback",
-    scope: ['my', 'topic.read']
-  }, (accessToken, refreshToken, profile, cb) => {
-    return cb(null, profile);
-  }
-));
+    "callbackURL": "http://localhost:3000/auth/typetalk/callback",
+    "clientID": config.clientID,
+    "clientSecret": config.clientSecret,
+    "scope": [
+        "my",
+        "topic.read"
+    ]
+}, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
 
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
+passport.serializeUser(function serializeUser (user, cb) {
+    cb(null, user);
 });
 
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+passport.deserializeUser(function deserializeUser (obj, cb) {
+    cb(null, obj);
 });
 
-app.use(require('morgan')('combined'));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(require("morgan")("combined"));
+app.use(require("cookie-parser")());
+app.use(require("body-parser").urlencoded({"extended": true}));
+app.use(require("express-session")({
+    "resave": true,
+    "saveUninitialized": true,
+    "secret": "keyboard cat"
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req, res) => {
-  res.send('<a href="/auth/typetalk">Login with Typetalk</a>');
+app.get("/", (req, res) => {
+    res.send('<a href="/auth/typetalk">Login with Typetalk</a>');
 });
 
-app.get('/profile', (req, res) => {
-  res.send('<p>ID: '+req.user.id+'</p><p>Name: '+req.user.name+'</p>');
+app.get("/profile", (req, res) => {
+    res.send(`<p>ID: ${req.user.id}</p><p>Name: ${req.user.name}</p>`);
 });
 
-app.get('/auth/typetalk',
-  passport.authenticate('typetalk'));
+app.get(
+    "/auth/typetalk",
+    passport.authenticate("typetalk")
+);
 
-app.get('/auth/typetalk/callback',
-  passport.authenticate('typetalk', { failureRedirect: '/' }),
-  (req, res) => {
-    res.redirect('/profile');
-  });
+app.get(
+    "/auth/typetalk/callback",
+    passport.authenticate("typetalk", {"failureRedirect": "/"}),
+    (req, res) => {
+        res.redirect("/profile");
+    }
+);
 
-app.listen(3000);
+app.listen(port);
 ```
+
+For working example, see [this repository](https://github.com/is2ei/passport-typetalk-example/blob/master/index.js)
