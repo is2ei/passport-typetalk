@@ -86,4 +86,4 @@ app.get(
 app.listen(port);
 ```
 
-For working example, see [this repository](https://github.com/is2ei/passport-typetalk-example/blob/master/index.js)
+For working example, see [this repository](https://github.com/is2ei/passport-typetalk-example)
