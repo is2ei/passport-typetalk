@@ -32,6 +32,7 @@
     "chai-passport-strategy": "^1.0.1",
     "coveralls": "^3.0.2",
     "eslint": "^5.14.0",
+    "eslint-config-is2ei": "^0.1.2",
     "eslint-plugin-mocha": "^5.3.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0"
