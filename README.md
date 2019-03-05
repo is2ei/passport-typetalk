@@ -4,7 +4,7 @@ passport-typetalk
 [![Build Status](https://img.shields.io/travis/is2ei/passport-typetalk/master.svg?style=flat-square)][travis]
 [![Coverage Status](https://img.shields.io/coveralls/github/is2ei/passport-typetalk.svg?style=flat-square)][coveralls]
 [![npm version](https://img.shields.io/npm/v/passport-typetalk.svg?style=flat-square)][npm]
-[![Join the chat at https://gitter.im/is2ei/passport-typetalk](https://badges.gitter.im/is2ei/passport-typetalk.svg)][gitter]
+[![Join the chat at https://gitter.im/is2ei/passport-typetalk](ttps://img.shields.io/gitter/room/is2ei/passport-typetalk.svg?style=flat-square)][gitter]
 
 [travis]: https://travis-ci.com/is2ei/passport-typetalk
 [coveralls]: https://coveralls.io/github/is2ei/passport-typetalk?branch=master
