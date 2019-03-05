@@ -1,7 +1,7 @@
 passport-typetalk
 ===
 
-[![Build Status](https://travis-ci.com/is2ei/passport-typetalk.svg?branch=master)][travis]
+[![Build Status](https://img.shields.io/travis/is2ei/passport-typetalk/master.svg?style=flat-square)][travis]
 [![Coverage Status](https://coveralls.io/repos/github/is2ei/passport-typetalk/badge.svg?branch=master)][coveralls]
 [![npm version](https://img.shields.io/npm/v/passport-typetalk.svg?style=flat-square)][npm]
 [![Join the chat at https://gitter.im/is2ei/passport-typetalk](https://badges.gitter.im/is2ei/passport-typetalk.svg)][gitter]
