@@ -4,18 +4,16 @@
     max-lines-per-function,
     max-len
 */
-var chai = require("chai");
-var TypetalkStrategy = require("../lib/strategy");
+const chai = require("chai");
+const TypetalkStrategy = require("../lib/strategy");
 
 
 describe("TypetalkStrategy", function () {
 
-    var url = "";
-
     describe("constructed", function () {
 
         describe("with normal options", function () {
-            var strategyWithNormalOptions = new TypetalkStrategy({
+            const strategy = new TypetalkStrategy({
                 "clientID": "ABC123",
                 "clientSecret": "secret"
             }, function () {
@@ -23,21 +21,21 @@ describe("TypetalkStrategy", function () {
             });
 
             it("should be named typetalk", function () {
-                expect(strategyWithNormalOptions.name).to.equal("typetalk");
+                expect(strategy.name).to.equal("typetalk");
             });
         });
 
         describe("without a clientID option", function () {
             it("should throw", function () {
                 expect(function () {
-                    var strategy = new TypetalkStrategy({
+                    const strategy = new TypetalkStrategy({
                         "clientSecret": "secret"
                     }, function () {
                         // Do nothing.
                     });
                     chai.passport.use(strategy)
-                        .redirect(function (u) {
-                            url = u;
+                        .redirect(function () {
+                            // Do nothing.
                         })
                         .req(function () {
                             // Do nothing.
@@ -52,14 +50,14 @@ describe("TypetalkStrategy", function () {
         describe("without a clientSecret option", function () {
             it("should not throw", function () {
                 expect(function () {
-                    var strategy = new TypetalkStrategy({
+                    const strategy = new TypetalkStrategy({
                         "clientID": "ABC123"
                     }, function () {
                         // Do nothing.
                     });
                     chai.passport.use(strategy)
-                        .redirect(function (u) {
-                            url = u;
+                        .redirect(function () {
+                            // Do nothing.
                         })
                         .req(function () {
                             // Do nothing.
@@ -72,12 +70,12 @@ describe("TypetalkStrategy", function () {
         describe("with null option", function () {
             it("should throw", function () {
                 expect(function () {
-                    var strategy = new TypetalkStrategy(null, function () {
+                    const strategy = new TypetalkStrategy(null, function () {
                         // Do nothiung.
                     });
                     chai.passport.use(strategy)
-                        .redirect(function (u) {
-                            url = u;
+                        .redirect(function () {
+                            // Do nothing.
                         })
                         .req(function () {
                             // Do nothiung.
@@ -92,13 +90,13 @@ describe("TypetalkStrategy", function () {
         describe("without verify", function () {
             it("should not throw", function () {
                 expect(function () {
-                    var strategy = new TypetalkStrategy({
+                    const strategy = new TypetalkStrategy({
                         "clientID": "ABC123",
                         "clientSecret": "secret"
                     });
                     chai.passport.use(strategy)
-                        .redirect(function (u) {
-                            url = u;
+                        .redirect(function () {
+                            // Do nothing.
                         })
                         .req(function () {
                             // Do nothing.
@@ -113,18 +111,18 @@ describe("TypetalkStrategy", function () {
     describe("issuing authorization request", function () {
 
         describe("that redirects to service provider without redirect URI", function () {
-            var strategyWithoutCallback = new TypetalkStrategy({
+            const strategy = new TypetalkStrategy({
                 "clientID": "ABC123",
                 "clientSecret": "secret"
             }, function () {
                 // Do nothing.
             });
 
-            before(function (done) {
-                chai.passport.use(strategyWithoutCallback)
+            let url = "";
+            before(function () {
+                chai.passport.use(strategy)
                     .redirect(function (u) {
                         url = u;
-                        done();
                     })
                     .req(function () {
                         // Do nothing.
@@ -138,7 +136,7 @@ describe("TypetalkStrategy", function () {
         });
 
         describe("that redirects to service provider with redirect URI", function () {
-            var strategyWithCallBack = new TypetalkStrategy({
+            const strategy = new TypetalkStrategy({
                 "callbackURL": "http://example.com/auth/typetalk/callback",
                 "clientID": "ABC123",
                 "clientSecret": "secret"
@@ -146,11 +144,11 @@ describe("TypetalkStrategy", function () {
                 // Do nothing.
             });
 
-            before(function (done) {
-                chai.passport.use(strategyWithCallBack)
+            let url = "";
+            before(function () {
+                chai.passport.use(strategy)
                     .redirect(function (u) {
                         url = u;
-                        done();
                     })
                     .req(function () {
                         // Do nothing.
@@ -164,7 +162,7 @@ describe("TypetalkStrategy", function () {
         });
 
         describe("that redirects to service provider with redirect URI and scope", function () {
-            var strategyWithScope = new TypetalkStrategy({
+            const strategy = new TypetalkStrategy({
                 "callbackURL": "http://example.com/auth/typetalk/callback",
                 "clientID": "ABC123",
                 "clientSecret": "secret",
@@ -173,8 +171,9 @@ describe("TypetalkStrategy", function () {
                 // Do nothing.
             });
 
+            let url = "";
             before(function (done) {
-                chai.passport.use(strategyWithScope)
+                chai.passport.use(strategy)
                     .redirect(function (u) {
                         url = u;
                         done();

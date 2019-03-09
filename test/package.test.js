@@ -1,5 +1,5 @@
 /* eslint-disable func-names */
-var strategy = require("..");
+const strategy = require("..");
 
 describe("passport-typetalk", function () {
 

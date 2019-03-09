@@ -5,20 +5,13 @@
     max-statements,
 */
 
-var TypetalkAPIError = require("../lib/errors/typetalkapierror"),
+const TypetalkAPIError = require("../lib/errors/typetalkapierror"),
     TypetalkStrategy = require("../lib/strategy");
-
-/* eslint-disable-next-line one-var */
-var UNAUTHORIZED_RESPONSE_CODE = 401,
-    body = "",
-    err = {},
-    profile = {},
-    profileId = 12345;
 
 describe("Strategy#userProfile", function () {
 
     describe("fetched from default endpoint", function () {
-        var strategy = new TypetalkStrategy({
+        const strategy = new TypetalkStrategy({
             "clientID": "ABC123",
             "clientSecret": "secret"
         }, function () {
@@ -33,7 +26,7 @@ describe("Strategy#userProfile", function () {
                 return callback(new Error("incorrect token argument"));
             }
 
-            body = '{"account":{"id":12345,"name":"bob",' +
+            const body = '{"account":{"id":12345,"name":"bob",' +
             '"fullName":"Bob Smith","suggestion":"Bob Smith",' +
             '"mailAddress":"bob@example.com",' +
             '"imageUrl":"https://typetalk.com' +
@@ -44,6 +37,7 @@ describe("Strategy#userProfile", function () {
             callback(null, body);
         };
 
+        let profile = null;
         before(function (done) {
             strategy.userProfile("token", function (e, p) {
                 if (e) {
@@ -56,6 +50,7 @@ describe("Strategy#userProfile", function () {
 
         it("should parse profile", function () {
             expect(profile.provider).to.equal("typetalk");
+            const profileId = 12345;
             expect(profile.id).to.equal(profileId);
             expect(profile.name).to.equal("bob");
             expect(profile.fullName).to.equal("Bob Smith");
@@ -73,7 +68,7 @@ describe("Strategy#userProfile", function () {
     });
 
     describe("error caused by invalid token", function () {
-        var strategy = new TypetalkStrategy({
+        const strategy = new TypetalkStrategy({
             "clientID": "ABC123",
             "clientSecret": "secret"
         }, function () {
@@ -81,7 +76,7 @@ describe("Strategy#userProfile", function () {
         });
 
         strategy._oauth2.get = function (url, accessToken, callback) {
-            body = '{"error":"invalid_client",' +
+            const body = '{"error":"invalid_client",' +
             '"error_description":"Invalid client or client is not authorized"}';
             callback({
                 "data": body,
@@ -89,10 +84,10 @@ describe("Strategy#userProfile", function () {
             });
         };
 
+        let err = {};
         before(function (done) {
-            strategy.userProfile("token", function (e, p) {
+            strategy.userProfile("token", function (e) {
                 err = e;
-                profile = p;
                 done();
             });
         });
@@ -103,12 +98,13 @@ describe("Strategy#userProfile", function () {
             expect(err.error).to.equal("invalid_client");
             expect(err.errorDescription)
                 .to.equal("Invalid client or client is not authorized");
+            const UNAUTHORIZED_RESPONSE_CODE = 401;
             expect(err.status).to.equal(UNAUTHORIZED_RESPONSE_CODE);
         });
     });
 
     describe("error caused by malformed response", function () {
-        var strategy = new TypetalkStrategy({
+        const strategy = new TypetalkStrategy({
             "clientID": "ABC123",
             "clientSecret": "secret"
         }, function () {
@@ -116,14 +112,14 @@ describe("Strategy#userProfile", function () {
         });
 
         strategy._oauth2.get = function (url, accessToken, callback) {
-            body = "Hello, world!";
+            const body = "Hello, world!";
             callback(null, body);
         };
 
+        let err = {};
         before(function (done) {
-            strategy.userProfile("token", function (e, p) {
+            strategy.userProfile("token", function (e) {
                 err = e;
-                profile = p;
                 done();
             });
         });
@@ -135,7 +131,7 @@ describe("Strategy#userProfile", function () {
     });
 
     describe("internal error", function () {
-        var strategy = new TypetalkStrategy({
+        const strategy = new TypetalkStrategy({
             "clientID": "ABC123",
             "clientSecret": "secret"
         }, function () {
@@ -146,6 +142,8 @@ describe("Strategy#userProfile", function () {
             return callback(new Error("something went wrong"));
         };
 
+        let err = {},
+            profile = {};
         before(function (done) {
             strategy.userProfile("wrong-token", function (e, p) {
                 err = e;
