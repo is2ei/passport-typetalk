@@ -29,8 +29,8 @@ const TypetalkStrategy = require("passport-typetalk").Strategy,
     express = require("express"),
     passport = require("passport");
 
-var app = express(),
-    port = 3000;
+const PORT = 3000,
+    app = express();
 
 passport.use(new TypetalkStrategy({
     "callbackURL": "http://localhost:3000/auth/typetalk/callback",
@@ -42,11 +42,11 @@ passport.use(new TypetalkStrategy({
     ]
 }, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
 
-passport.serializeUser(function serializeUser (user, cb) {
+passport.serializeUser((user, cb) => {
     cb(null, user);
 });
 
-passport.deserializeUser(function deserializeUser (obj, cb) {
+passport.deserializeUser((obj, cb) => {
     cb(null, obj);
 });
 
@@ -83,7 +83,7 @@ app.get(
     }
 );
 
-app.listen(port);
+app.listen(PORT);
 ```
 
 For working example, see [this repository](https://github.com/is2ei/passport-typetalk-example)
