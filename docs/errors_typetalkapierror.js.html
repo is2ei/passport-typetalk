@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: errors/typetalkapierror.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,50 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: errors/typetalkapierror.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const IntermediateInheritor = function IntermediateInheritor () {
+    // Do nothing.
+};
 
+/**
+ * `TypetalkAPIError` error.
+ *
+ * @constructor
+ * @param {string} error
+ * @param {string} errorDescription
+ * @access public
+ */
+function TypetalkAPIError (error, errorDescription) {
 
-    <h3> </h3>
+    Error.call(this);
+    Error.captureStackTrace(this, TypetalkAPIError);
+    this.name = "TypetalkAPIError";
+    this.error = error;
+    this.errorDescription = errorDescription;
+    this.status = 401;
+}
 
+/**
+ * Inherit from `Error`.
+ */
+IntermediateInheritor.prototype = Error.prototype;
+TypetalkAPIError.prototype = new IntermediateInheritor();
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Expose constructor.
+ */
+module.exports = TypetalkAPIError;
+</code></pre>
+        </article>
+    </section>
 
 
 
