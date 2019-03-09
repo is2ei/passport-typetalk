@@ -1,6 +1,5 @@
 /*
     eslint-disable
-    func-names,
     max-lines-per-function,
     max-statements,
 */
@@ -8,17 +7,17 @@
 const TypetalkAPIError = require("../lib/errors/typetalkapierror"),
     TypetalkStrategy = require("../lib/strategy");
 
-describe("Strategy#userProfile", function () {
+describe("Strategy#userProfile", () => {
 
-    describe("fetched from default endpoint", function () {
+    describe("fetched from default endpoint", () => {
         const strategy = new TypetalkStrategy({
             "clientID": "ABC123",
             "clientSecret": "secret"
-        }, function () {
+        }, () => {
             // Do nothing.
         });
 
-        strategy._oauth2.get = function (url, accessToken, callback) {
+        strategy._oauth2.get = (url, accessToken, callback) => {
             if (url !== "https://typetalk.com/api/v1/profile") {
                 return callback(new Error("incorrect url argument"));
             }
@@ -38,8 +37,8 @@ describe("Strategy#userProfile", function () {
         };
 
         let profile = null;
-        before(function (done) {
-            strategy.userProfile("token", function (e, p) {
+        before((done) => {
+            strategy.userProfile("token", (e, p) => {
                 if (e) {
                     return done(e);
                 }
@@ -48,7 +47,7 @@ describe("Strategy#userProfile", function () {
             });
         });
 
-        it("should parse profile", function () {
+        it("should parse profile", () => {
             expect(profile.provider).to.equal("typetalk");
             const profileId = 12345;
             expect(profile.id).to.equal(profileId);
@@ -67,15 +66,15 @@ describe("Strategy#userProfile", function () {
         });
     });
 
-    describe("error caused by invalid token", function () {
+    describe("error caused by invalid token", () => {
         const strategy = new TypetalkStrategy({
             "clientID": "ABC123",
             "clientSecret": "secret"
-        }, function () {
+        }, () => {
             // Do nothing.
         });
 
-        strategy._oauth2.get = function (url, accessToken, callback) {
+        strategy._oauth2.get = (url, accessToken, callback) => {
             const body = '{"error":"invalid_client",' +
             '"error_description":"Invalid client or client is not authorized"}';
             callback({
@@ -85,14 +84,14 @@ describe("Strategy#userProfile", function () {
         };
 
         let err = {};
-        before(function (done) {
-            strategy.userProfile("token", function (e) {
+        before((done) => {
+            strategy.userProfile("token", (e) => {
                 err = e;
                 done();
             });
         });
 
-        it("should error", function () {
+        it("should error", () => {
             expect(err).to.be.an.instanceOf(Error);
             expect(err).to.be.an.instanceOf(TypetalkAPIError);
             expect(err.error).to.equal("invalid_client");
@@ -103,56 +102,55 @@ describe("Strategy#userProfile", function () {
         });
     });
 
-    describe("error caused by malformed response", function () {
+    describe("error caused by malformed response", () => {
         const strategy = new TypetalkStrategy({
             "clientID": "ABC123",
             "clientSecret": "secret"
-        }, function () {
+        }, () => {
             // Do nothing.
         });
 
-        strategy._oauth2.get = function (url, accessToken, callback) {
+        strategy._oauth2.get = (url, accessToken, callback) => {
             const body = "Hello, world!";
             callback(null, body);
         };
 
         let err = {};
-        before(function (done) {
-            strategy.userProfile("token", function (e) {
+        before((done) => {
+            strategy.userProfile("token", (e) => {
                 err = e;
                 done();
             });
         });
 
-        it("should error", function () {
+        it("should error", () => {
             expect(err).to.be.an.instanceOf(Error);
             expect(err.message).to.equal("Failed to parse user profile");
         });
     });
 
-    describe("internal error", function () {
-        const strategy = new TypetalkStrategy({
-            "clientID": "ABC123",
-            "clientSecret": "secret"
-        }, function () {
-            // Do nothing.
-        });
+    describe("internal error", () => {
+        const ERROR_MSG = "something went wrong",
+            strategy = new TypetalkStrategy({
+                "clientID": "ABC123",
+                "clientSecret": "secret"
+            }, () => {
+                // Do nothing.
+            });
 
-        strategy._oauth2.get = function (url, accessToken, callback) {
-            return callback(new Error("something went wrong"));
-        };
+        strategy._oauth2.get = (a, b, cb) => cb(new Error(ERROR_MSG));
 
         let err = {},
             profile = {};
-        before(function (done) {
-            strategy.userProfile("wrong-token", function (e, p) {
+        before((done) => {
+            strategy.userProfile("wrong-token", (e, p) => {
                 err = e;
                 profile = p;
                 done();
             });
         });
 
-        it("should error", function () {
+        it("should error", () => {
             expect(err).to.be.an.instanceOf(Error);
             expect(err.constructor.name).to.equal("InternalOAuthError");
             expect(err.message).to.equal("Failed to fetch user profile");
@@ -160,7 +158,7 @@ describe("Strategy#userProfile", function () {
             expect(err.oauthError.message).to.equal("something went wrong");
         });
 
-        it("should not load profile", function () {
+        it("should not load profile", () => {
             /* eslint-disable-next-line no-unused-expressions */
             expect(profile).to.be.undefined;
         });
