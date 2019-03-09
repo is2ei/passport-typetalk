@@ -87,3 +87,7 @@ app.listen(PORT);
 ```
 
 For working example, see [this repository](https://github.com/is2ei/passport-typetalk-example)
+
+## API Documents
+
+[Here](https://is2ei.github.io/passport-typetalk/index.html).
