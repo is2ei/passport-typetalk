@@ -3,6 +3,6 @@
         "include": ["./lib"]
     },
     "opts": {
-        "destination": "./doc/"
+        "destination": "./docs/"
     }
 }
