@@ -3,14 +3,11 @@
     max-lines-per-function,
     max-len
 */
-const chai = require("chai");
-const TypetalkStrategy = require("../lib/strategy");
-
+const TypetalkStrategy = require("../lib/strategy"),
+    chai = require("chai");
 
 describe("TypetalkStrategy", () => {
-
     describe("constructed", () => {
-
         describe("with normal options", () => {
             const strategy = new TypetalkStrategy({
                 "clientID": "ABC123",
@@ -108,7 +105,6 @@ describe("TypetalkStrategy", () => {
     });
 
     describe("issuing authorization request", () => {
-
         describe("that redirects to service provider without redirect URI", () => {
             const strategy = new TypetalkStrategy({
                 "clientID": "ABC123",
