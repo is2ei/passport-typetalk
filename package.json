@@ -1,6 +1,6 @@
 {
   "name": "passport-typetalk",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Typetalk authentication strategy for Passport.",
   "keywords": [
     "passport",
