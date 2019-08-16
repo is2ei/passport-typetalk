@@ -1,5 +1,7 @@
 test/
 docs/
 CONTRIBUTING.md
+DEVELOPMENT.md
+jsdoc.conf.json
 .eslintrc
 .travis.yml
