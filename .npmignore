@@ -1,0 +1,5 @@
+test/
+docs/
+CONTRIBUTING.md
+.eslintrc
+.travis.yml
