@@ -24,8 +24,8 @@
   },
   "license": "MIT",
   "main": "./lib",
-  "dependencies": {
-    "passport-oauth2": "^1.4.0"
+  "peerDependencies": {
+    "passport-oauth2": "1.x.x"
   },
   "devDependencies": {
     "chai": "^4.2.0",
