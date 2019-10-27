@@ -5,11 +5,15 @@ node_js:
   - "10"
   - "12"
 
+env:
+  - PASSPORT_OAUTH2_VERSION="1.x.x"
+
 script:
-  - "npm run lint"
+  - npm install passport-oauth2@"$PASSPORT_OAUTH2_VERSION"
+  - npm run lint
 
 after_success:
-  - "npm run report-coverage"
+  - npm run report-coverage
 
 deploy:
   provider: npm
