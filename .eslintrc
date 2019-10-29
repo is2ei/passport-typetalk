@@ -13,5 +13,8 @@
     "plugins": [
         "mocha"
     ],
-    "extends": "is2ei"
+    "extends": [
+        "is2ei",
+        "plugin:mocha/recommended"
+    ]
 }
