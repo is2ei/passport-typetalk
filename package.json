@@ -43,8 +43,10 @@
   },
   "scripts": {
     "docs": "jsdoc -c ./jsdoc.conf.json",
-    "lint": "eslint ./lib ./test",
-    "test": "mocha --require test/bootstrap/node test/*.test.js",
+    "lint": "eslint ./lib ./test ./bench",
+    "test": "npm run test:unit && npm run test:bench",
+    "test:unit": "mocha --require test/bootstrap/node test/*.test.js",
+    "test:bench": "mocha bench",
     "coverage": "nyc mocha --require test/bootstrap/node test/*.test.js",
     "report-coverage": "nyc mocha --require test/bootstrap/node && nyc report --reporter=text-lcov | coveralls"
   }
