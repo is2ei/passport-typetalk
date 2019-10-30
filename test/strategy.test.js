@@ -18,13 +18,13 @@ describe("TypetalkStrategy", function () {
             });
 
             it("should be named typetalk", function () {
-                expect(strategy.name).to.equal("typetalk");
+                chai.expect(strategy.name).to.equal("typetalk");
             });
         });
 
         describe("without a clientID option", function () {
             it("should throw", function () {
-                expect(() => {
+                chai.expect(() => {
                     const strategy = new TypetalkStrategy({
                         "clientSecret": "secret"
                     }, () => {
@@ -46,7 +46,7 @@ describe("TypetalkStrategy", function () {
 
         describe("without a clientSecret option", function () {
             it("should not throw", function () {
-                expect(() => {
+                chai.expect(() => {
                     const strategy = new TypetalkStrategy({
                         "clientID": "ABC123"
                     }, () => {
@@ -66,7 +66,7 @@ describe("TypetalkStrategy", function () {
 
         describe("with null option", function () {
             it("should throw", function () {
-                expect(() => {
+                chai.expect(() => {
                     const strategy = new TypetalkStrategy(null, () => {
                         // Do nothiung.
                     });
@@ -86,7 +86,7 @@ describe("TypetalkStrategy", function () {
 
         describe("without verify", function () {
             it("should not throw", function () {
-                expect(() => {
+                chai.expect(() => {
                     const strategy = new TypetalkStrategy({
                         "clientID": "ABC123",
                         "clientSecret": "secret"
@@ -127,7 +127,7 @@ describe("TypetalkStrategy", function () {
             });
 
             it("should be redirected", function () {
-                expect(url).to.equal("https://typetalk.com/oauth2/authorize?response_type=code&scope=my&client_id=ABC123");
+                chai.expect(url).to.equal("https://typetalk.com/oauth2/authorize?response_type=code&scope=my&client_id=ABC123");
             });
         });
 
@@ -153,7 +153,7 @@ describe("TypetalkStrategy", function () {
             });
 
             it("should be redirected", function () {
-                expect(url).to.equal("https://typetalk.com/oauth2/authorize?response_type=code&redirect_uri=http%3A%2F%2Fexample.com%2Fauth%2Ftypetalk%2Fcallback&scope=my&client_id=ABC123");
+                chai.expect(url).to.equal("https://typetalk.com/oauth2/authorize?response_type=code&redirect_uri=http%3A%2F%2Fexample.com%2Fauth%2Ftypetalk%2Fcallback&scope=my&client_id=ABC123");
             });
         });
 
@@ -181,7 +181,7 @@ describe("TypetalkStrategy", function () {
             });
 
             it("should be redirected", function () {
-                expect(url).to.equal("https://typetalk.com/oauth2/authorize?response_type=code&redirect_uri=http%3A%2F%2Fexample.com%2Fauth%2Ftypetalk%2Fcallback&scope=my%20topic.read&client_id=ABC123");
+                chai.expect(url).to.equal("https://typetalk.com/oauth2/authorize?response_type=code&redirect_uri=http%3A%2F%2Fexample.com%2Fauth%2Ftypetalk%2Fcallback&scope=my%20topic.read&client_id=ABC123");
             });
         });
 

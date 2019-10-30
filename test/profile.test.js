@@ -1,6 +1,7 @@
 /* eslint-disable func-names */
 
-const Profile = require("../lib/profile");
+const Profile = require("../lib/profile"),
+    chai = require("chai");
 
 describe("Profile#parse", function () {
 
@@ -13,7 +14,7 @@ describe("Profile#parse", function () {
 
         it("should parse profile", function () {
             const profileId = 12345;
-            expect(profile.id).to.equal(profileId);
+            chai.expect(profile.id).to.equal(profileId);
         });
     });
 });

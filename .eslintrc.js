@@ -1,20 +1,20 @@
+"use strict";
+
 module.exports = {
-    "env": {
-        "node": true,
-        "mocha": true
+    parserOptions: {
+        ecmaVersion: 2015,
+        sourceType: "module"
     },
-    "globals": {
-        "expect": true
-    },
-    "parserOptions": { 
-        "ecmaVersion": 2015,
-        "sourceType": "module" 
-    },
-    "plugins": [
+    plugins: [
         "mocha"
     ],
-    "extends": [
+    extends: [
         "is2ei",
-        "plugin:mocha/recommended"
-    ]
-}
+        "plugin:mocha/recommended",
+        "eslint:recommended"
+    ],
+    env: {
+        node: true,
+        mocha: true
+    }
+};
