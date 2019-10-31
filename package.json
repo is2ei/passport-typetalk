@@ -36,6 +36,7 @@
     "eslint-plugin-mocha": "^6.2.1",
     "jsdoc": "^3.6.3",
     "mocha": "^6.2.2",
+    "mochawesome": "^4.1.0",
     "nyc": "^14.1.1"
   },
   "engines": {
@@ -46,7 +47,7 @@
     "lint": "eslint ./lib ./test ./bench",
     "test": "npm run test:unit && npm run test:bench",
     "test:unit": "mocha --require test/bootstrap/node test/*.test.js",
-    "test:bench": "mocha bench",
+    "test:bench": "mocha bench --reporter mochawesome --reporter-options consoleReporter=min",
     "coverage": "nyc mocha --require test/bootstrap/node test/*.test.js",
     "report-coverage": "nyc mocha --require test/bootstrap/node && nyc report --reporter=text-lcov | coveralls"
   }

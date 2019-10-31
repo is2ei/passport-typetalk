@@ -1,4 +1,8 @@
-node_modules
-coverage
-.nyc_output
-out
+## Dependencies
+node_modules/
+
+## Unit testing
+.nyc_output/
+out/
+mochawesome-report/
+coverage/
