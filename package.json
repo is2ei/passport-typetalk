@@ -11,6 +11,9 @@
     "identity"
   ],
   "homepage": "https://github.com/is2ei/passport-typetalk",
+  "bugs": {
+    "url": "https://github.com/is2ei/passport-typetalk/issues"
+  },
   "author": {
     "name": "Issei Horie",
     "email": "is2ei.horie@gmail.com",
@@ -19,9 +22,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/is2ei/passport-typetalk.git"
-  },
-  "bugs": {
-    "url": "https://github.com/is2ei/passport-typetalk/issues"
   },
   "license": "MIT",
   "main": "./lib",
