@@ -16,5 +16,8 @@ module.exports = {
     env: {
         node: true,
         mocha: true
+    },
+    rules: {
+        "mocha/no-hooks-for-single-case": 0
     }
 };

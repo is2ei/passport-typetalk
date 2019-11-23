@@ -20,7 +20,9 @@
     "email": "is2ei.horie@gmail.com",
     "url": "http://is2ei.com"
   },
-  "files": ["*"],
+  "files": [
+    "*"
+  ],
   "main": "./lib",
   "repository": {
     "type": "git",
@@ -29,7 +31,8 @@
   "scripts": {
     "docs": "jsdoc -c ./jsdoc.conf.json",
     "lint": "eslint ./lib ./test ./bench",
-    "test": "npm run test:unit && npm run test:bench",
+    "pretest": "npm install --no-save passport-oauth2",
+    "test": "npm run lint && npm run test:unit && npm run test:bench",
     "test:unit": "mocha --require test/bootstrap/node test/*.test.js",
     "test:bench": "mocha bench --reporter mochawesome --reporter-options consoleReporter=min",
     "coverage": "nyc mocha --require test/bootstrap/node test/*.test.js",
