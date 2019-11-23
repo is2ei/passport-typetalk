@@ -35,9 +35,6 @@
     "coverage": "nyc mocha --require test/bootstrap/node test/*.test.js",
     "report-coverage": "nyc mocha --require test/bootstrap/node && nyc report --reporter=text-lcov | coveralls"
   },
-  "peerDependencies": {
-    "passport-oauth2": "1.x.x"
-  },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-passport-strategy": "^1.0.1",
@@ -49,6 +46,9 @@
     "mocha": "^6.2.2",
     "mochawesome": "^4.1.0",
     "nyc": "^14.1.1"
+  },
+  "peerDependencies": {
+    "passport-oauth2": "1.x.x"
   },
   "engines": {
     "node": ">=0.4.0"
