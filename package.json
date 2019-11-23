@@ -26,6 +26,15 @@
     "type": "git",
     "url": "https://github.com/is2ei/passport-typetalk.git"
   },
+  "scripts": {
+    "docs": "jsdoc -c ./jsdoc.conf.json",
+    "lint": "eslint ./lib ./test ./bench",
+    "test": "npm run test:unit && npm run test:bench",
+    "test:unit": "mocha --require test/bootstrap/node test/*.test.js",
+    "test:bench": "mocha bench --reporter mochawesome --reporter-options consoleReporter=min",
+    "coverage": "nyc mocha --require test/bootstrap/node test/*.test.js",
+    "report-coverage": "nyc mocha --require test/bootstrap/node && nyc report --reporter=text-lcov | coveralls"
+  },
   "peerDependencies": {
     "passport-oauth2": "1.x.x"
   },
@@ -43,14 +52,5 @@
   },
   "engines": {
     "node": ">=0.4.0"
-  },
-  "scripts": {
-    "docs": "jsdoc -c ./jsdoc.conf.json",
-    "lint": "eslint ./lib ./test ./bench",
-    "test": "npm run test:unit && npm run test:bench",
-    "test:unit": "mocha --require test/bootstrap/node test/*.test.js",
-    "test:bench": "mocha bench --reporter mochawesome --reporter-options consoleReporter=min",
-    "coverage": "nyc mocha --require test/bootstrap/node test/*.test.js",
-    "report-coverage": "nyc mocha --require test/bootstrap/node && nyc report --reporter=text-lcov | coveralls"
   }
 }
