@@ -20,11 +20,12 @@
     "email": "is2ei.horie@gmail.com",
     "url": "http://is2ei.com"
   },
+  "files": ["*"],
+  "main": "./lib",
   "repository": {
     "type": "git",
     "url": "https://github.com/is2ei/passport-typetalk.git"
   },
-  "main": "./lib",
   "peerDependencies": {
     "passport-oauth2": "1.x.x"
   },
