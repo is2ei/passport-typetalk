@@ -46,9 +46,9 @@
     "eslint-config-is2ei": "^0.1.10",
     "eslint-plugin-mocha": "^6.2.2",
     "jsdoc": "^3.6.3",
-    "mocha": "^6.2.2",
+    "mocha": "^7.0.0",
     "mochawesome": "^4.1.0",
-    "nyc": "^14.1.1"
+    "nyc": "^15.0.0"
   },
   "peerDependencies": {
     "passport-oauth2": "1.x.x"
