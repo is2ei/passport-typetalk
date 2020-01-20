@@ -39,7 +39,7 @@
     "report-coverage": "nyc mocha --require test/bootstrap/node && nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "4.2.0",
     "chai-passport-strategy": "^1.0.1",
     "coveralls": "^3.0.9",
     "eslint": "^6.7.2",
