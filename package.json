@@ -46,7 +46,7 @@
     "eslint-config-is2ei": "0.1.10",
     "eslint-plugin-mocha": "6.2.2",
     "jsdoc": "3.6.3",
-    "mocha": "7.0.0",
+    "mocha": "7.0.1",
     "mochawesome": "4.1.0",
     "nyc": "15.0.0"
   },
